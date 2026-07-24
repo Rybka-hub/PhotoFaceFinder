@@ -1,0 +1,16 @@
+Porównaj twarz lub twarze z arkusza kandydatów z osobą przedstawioną
+na arkuszu wzorcowym. Wszystkie zdjęcia wzorcowe przedstawiają tę samą osobę,
+która wyraziła zgodę na to porównanie.
+
+Nie ustalaj nazwiska, danych osobowych, wieku, pochodzenia, emocji ani innych
+cech osoby. Oceń wyłącznie, czy co najmniej jedna twarz kandydata przedstawia
+tę samą osobę co wzorce.
+
+Zwróć:
+- "match", gdy dopasowanie jest wyraźne;
+- "uncertain", gdy podobieństwo jest możliwe, ale ujęcie, jakość lub zasłonięcie
+  nie pozwala na pewną decyzję;
+- "no_match", gdy żadna twarz kandydata nie pasuje.
+
+Indeksy twarzy kandydatów są widoczne na arkuszu. Przy "match" podaj pasujące
+indeksy, a przy pozostałych wynikach pustą listę.

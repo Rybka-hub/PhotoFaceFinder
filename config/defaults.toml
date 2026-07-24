@@ -1,0 +1,25 @@
+[application]
+name = "Photo Face Finder"
+version = "0.1.0"
+max_references = 10
+supported_extensions = [".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff", ".webp"]
+
+[matching]
+borderline_threshold = 0.363
+confident_threshold = 0.45
+
+[detection]
+score_threshold = 0.9
+nms_threshold = 0.3
+top_k = 5000
+max_dimension = 1920
+
+[openai]
+model = "gpt-5.6-luna"
+timeout_seconds = 30.0
+max_retries = 2
+max_reference_faces = 10
+
+[models]
+yunet = "resources/models/face_detection_yunet_2023mar.onnx"
+sface = "resources/models/face_recognition_sface_2021dec.onnx"
