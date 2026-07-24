@@ -9,16 +9,49 @@ Desktopowa aplikacja dla Windows 10/11 x64, która wyszukuje zdjęcia zawierają
 - PowerShell
 - połączenie z internetem tylko podczas instalacji zależności i opcjonalnego używania OpenAI
 
-Gotowy plik `PhotoFaceFinder.exe` nie wymaga instalacji Pythona.
+Po samodzielnym zbudowaniu plik `PhotoFaceFinder.exe` nie wymaga instalacji
+Pythona na komputerze docelowym.
 
-## Najprostsze uruchomienie
+## Uruchomienie po sklonowaniu repozytorium
 
-Otwórz dwukrotnie:
+Repozytorium nie zawiera skompilowanego pliku EXE. Po jego sklonowaniu wybierz
+jedną z poniższych metod.
+
+### Opcja 1: uruchomienie ze źródeł
+
+Utwórz środowisko i zainstaluj zależności:
+
+```powershell
+py -3.12 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -r requirements.lock.txt
+```
+
+Następnie uruchom aplikację:
+
+```powershell
+$env:PYTHONPATH = "src"
+python src\main.py
+```
+
+Folderu `.venv` nie wolno kopiować na inny komputer.
+
+### Opcja 2: zbudowanie samodzielnego EXE
+
+Uruchom skrypt budujący:
+
+```powershell
+.\scripts\build.ps1
+```
+
+Skrypt przygotuje środowisko, zainstaluje zależności, uruchomi testy i utworzy:
 
 ```text
 dist\PhotoFaceFinder.exe
 ```
 
+Gotowy plik otwórz dwukrotnie. Nie wymaga on instalacji Pythona.
 Pierwsze uruchomienie może potrwać kilka sekund, ponieważ pojedynczy EXE rozpakowuje
 komponenty do katalogu tymczasowego Windows.
 
@@ -31,27 +64,11 @@ komponenty do katalogu tymczasowego Windows.
 - `scripts/` — skrypty budowania;
 - `dist/` — gotowy EXE (ignorowany przez Git).
 
-## Utworzenie środowiska
-
-```powershell
-py -3.12 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-python -m pip install -r requirements.lock.txt
-```
-
-Folderu `.venv` nie wolno kopiować na inny komputer.
-
-## Uruchomienie
-
-```powershell
-$env:PYTHONPATH = "src"
-python src\main.py
-```
-
 ## Konfiguracja OpenAI przez `.env`
 
-Otwórz plik `dist\.env` znajdujący się obok EXE i wklej klucz:
+Przy uruchamianiu EXE utwórz plik `dist\.env` obok programu. Przy uruchamianiu
+ze źródeł utwórz `.env` w głównym folderze projektu. Jako wzoru użyj
+`.env.example` i wklej własny klucz:
 
 ```dotenv
 OPENAI_API_KEY=sk-...
@@ -72,14 +89,6 @@ pytest
 ```
 
 Testy nie korzystają z prawdziwego API OpenAI.
-
-## Budowanie EXE
-
-```powershell
-.\scripts\build.ps1
-```
-
-Wynik: `dist\PhotoFaceFinder.exe`.
 
 ## Przeniesienie na inny komputer
 
